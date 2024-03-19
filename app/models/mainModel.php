@@ -47,4 +47,14 @@
             return $cadena;
         }
 
+        protected function verificarDatos($filtro, $cadena){
+            if(preg_match("/^".$filtro."$/", $cadena)){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+
+
     }
