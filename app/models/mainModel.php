@@ -148,22 +148,50 @@
                 $tabla .= '
                     <a class="pagination-previous is-disabled" disabled >Anterior</a>
                     <ul class="pagination-list">
-
                 ';
-
             }else{
                 $tabla .= '
                     <a class="pagination-previous" href="'.$url.($pagina-1).'/">Anterior</a>
                     <ul class="pagination-list">
                         <li><a class="pagination-link" href="'.$url.'1/">1</a></li>
                         <li><span class="pagination-ellipsis">&hellip;</span></li>
-
-                    
                 ';
             }
+            
+            $ci = 0; //Contador iterativo
+            for($i=$pagina; $i<=$numeroPaginas; $i++){
+                if($ci>=$botones){
+                    break;
+                }
+                if($pagina==$i){
+                    $tabla.='
+                        <li><a class="pagination-link is-current" href="'.$url.$i.'/">'.$i.'</a></li>
+                    ';
+                }else{
+                    $tabla.='
+                        <li><a class="pagination-link" href="'.$url.$i.'/">'.$i.'</a></li>
+                    ';
+                }
+                $ci++;
+            }
+
+            if($pagina==$numeroPaginas){
+                $tabla.='
+                    </ul>
+                    <a class="pagination-next is-disabled" disabled>Siguiente</a>
+                ';
+            }else{
+                $tabla.='
+                        <li><span class="pagination-ellipsis">&hellip;</span></li>
+                        <li><a class="pagination-link" href="'.$url.$numeroPaginas.'/">'.$numeroPaginas.'</a></li>
+                    </ul>
+                    <a class="pagination-next" href="'.$url.($pagina+1).'/">Siguiente</a>
+                ';
+            }
+            $tabla.='</nav>';
+            return $tabla;
 
         }
-
 
 
 
