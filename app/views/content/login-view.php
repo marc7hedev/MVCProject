@@ -18,7 +18,7 @@
         </div>
 
         <p class="has-text-centered mb-4 mt-3">
-            <button type="submit" class="button is-info is-rounded">Iniciar sesion</button>
+            <button type="submit" class="button is-info is-rounded">Iniciar sesión</button>
         </p>
 
     </form>
