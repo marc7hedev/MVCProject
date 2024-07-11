@@ -78,15 +78,75 @@
                 exit();
             }
 
+            # Verificando email #
+            if ($email != ""){
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $check_email = $this->ejecutarConsulta(
+                        "SELECT usuario_email FROM usuario WHERE
+                        usuario_email='$email' ");
 
+                        if($check_email->rowCount()>0){
+                            $alerta = [
+                                "tipo"=>"simple",
+                                "titulo"=>"Ocurrió un error inesperado",
+                                "texto"=>"El email que ha ingresado
+                                ya se encuentra registrado",
+                                "icono"=>"error"
+                            ];
+                            return json_encode($alerta);
+                            exit();
+                        }
+
+                } else {
+                    $alerta = [
+                    "tipo"=>"simple",
+                    "titulo"=>"Ocurrió un error inesperado",
+                    "texto"=>"Ha ingresado un email no válido",
+                    "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                }
+            }
+
+            # Verificando claves #
+            if($clave1 != $clave2){
+                $alerta = [
+                    "tipo"=>"simple",
+                    "titulo"=>"Ocurrió un error inesperado",
+                    "texto"=>"Las contraseñas que acaba de ingresar no coinciden",
+                    "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+            } else {
+                $clave = password_hash($clave1, PASSWORD_BCRYPT, ["cost"=>10]);
+            }
+
+            # Verificando usuario #
+            $check_usuario = $this->ejecutarConsulta(
+                "SELECT usuario_usuario FROM usuario WHERE
+                usuario_usuario='$usuario' ");
+            if($check_usuario->rowCount()>0){
+                $alerta = [
+                    "tipo"=>"simple",
+                    "titulo"=>"Ocurrió un error inesperado",
+                    "texto"=>"El usuario que ha ingresado
+                    ya se encuentra registrado",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            }
+
+            # Directorio de imágenes #
+            $img_dir = "../views/fotos/";
+
+        
 
         }
-
-
 
 
     }
 
 
-
-?>
