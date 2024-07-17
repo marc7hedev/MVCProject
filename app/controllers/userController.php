@@ -7,7 +7,7 @@ use app\models\mainModel;
 class userController extends mainModel
 {
 
-    /*----------  Controlador registrar usuario  ----------*/
+    /*----------  CONTROLADOR registrar usuario  ----------*/
     public function registrarUsuarioControlador()
     {
 
@@ -277,25 +277,27 @@ class userController extends mainModel
         return json_encode($alerta);
     }
 
-
-
-    /*----------  Controlador listar usuario  ----------*/
     
 
 
-    /*----------  Controlador eliminar usuario  ----------*/
+
+    /*----------  CONTROLADOR listar usuario  ----------*/
     
 
 
-    /*----------  Controlador actualizar usuario  ----------*/
+    /*----------  CONTROLADOR eliminar usuario  ----------*/
     
 
 
-    /*----------  Controlador eliminar foto usuario  ----------*/
+    /*----------  CONTROLADOR actualizar usuario  ----------*/
     
 
 
-    /*----------  Controlador actualizar foto usuario  ----------*/
+    /*----------  CONTROLADOR eliminar foto usuario  ----------*/
+    
+
+
+    /*----------  CONTROLADOR actualizar foto usuario  ----------*/
     
 
 }
