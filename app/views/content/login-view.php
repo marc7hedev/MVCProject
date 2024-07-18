@@ -26,7 +26,7 @@
 
 
 <?php
-    if(isset([$_POST]['login_usuario']) && isset([$_POST]['login_clave']) ){
+    if(isset($_POST['login_usuario']) && isset($_POST['login_clave']) ){
         $insLogin->iniciarSesionControlador();
     }
 ?>

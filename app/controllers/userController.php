@@ -151,7 +151,7 @@ class userController extends mainModel
                 }
             }
 
-            # Verificando formato de imagenes #
+            # Verificando formato de imágenes #
             if (mime_content_type($_FILES['usuario_foto']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['usuario_foto']['tmp_name']) != "image/png") {
                 $alerta = [
                     "tipo" => "simple",
