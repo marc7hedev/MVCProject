@@ -391,7 +391,7 @@ class userController extends mainModel
 
         $tabla .= '</tbody></table></div>';
 
-        if($total>=1 && $pagina<=$numeroPaginas){
+        if($total>=0 && $pagina<=$numeroPaginas){
 
             $tabla.='
                 <p class="has-text-right">Mostrando usuarios <strong>'.$pag_inicio.'</strong> al <strong>'.$pag_final.'</strong> de un <strong>total de '.$total.'</strong></p>';
