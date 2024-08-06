@@ -406,7 +406,64 @@ class userController extends mainModel
 
 
     /*----------  CONTROLADOR eliminar usuario  ----------*/
-    
+    public function eliminarUsuarioControlador(){
+        $id = $this->limpiarCadena($_POST['usuario_id']);
+
+        if($id==1){
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "No podemos eliminar el usuario principal del sistema",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        }
+
+        # Verificando usuario #
+        $datos = $this->ejecutarConsulta("SELECT * FROM usuario WHERE usuario_id='$id'");
+
+        if($datos->rowCount()<=0){
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "No se ha encontrado el usuario en el sistema",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        } else {
+            $datos = $datos->fetch();
+        }
+
+        $eliminarUsuario = $this->eliminarRegistro("usuario", "usuario_id", $id);
+
+        if($eliminarUsuario->rowCount()==1){
+
+            if(is_file("../views/fotos/" .$datos['usuario_foto'])) {
+                chmod("../views/fotos/" .$datos['usuario_foto'], 0777);
+                unlink("../views/fotos/" .$datos['usuario_foto']);
+            }
+
+            $alerta = [
+                "tipo" => "recargar",
+                "titulo" => "Usuario eliminado",
+                "texto" => "El usuario ".$datos['usuario_nombre']." ".$datos['usuario_apellido']." se eliminó con éxito",
+                "icono" => "success"
+            ];
+        }else{
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "No se pudo eliminar al usuario ".$datos['usuario_nombre']." ".$datos['usuario_apellido'].", por favor intente nuevamente ",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        }
+        return json_encode($alerta);
+
+    }
 
 
     /*----------  CONTROLADOR actualizar usuario  ----------*/
