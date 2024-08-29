@@ -475,6 +475,96 @@ class userController extends mainModel
 
 
     /*----------  CONTROLADOR actualizar foto usuario  ----------*/
-    
+    public function actualizarUsuarioControlador(){
+        $id = $this->limpiarCadena($_POST['usuario_id']);
+
+
+        # Verificando usuario #
+        $datos = $this->ejecutarConsulta("SELECT * FROM usuario WHERE usuario_id='$id'");
+
+        if($datos->rowCount()<=0){
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "No se ha encontrado el usuario en el sistema",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        } else {
+            $datos = $datos->fetch();
+        }
+
+        $admin_usuario = $this->limpiarCadena($_POST['administrador_usuario']);
+        $admin_clave = $this->limpiarCadena($_POST['administrador_clave']);
+        
+        # Verificando campos obligatorios #
+        if ($admin_usuario == "" || $admin_clave == "" ) {
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "No has llenado todos los campos que son obligatorios, que corresponden a su USUARIO y CONTRASEÑA",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        }
+
+        # Verificando integridad de los datos #
+        if ($this->verificarDatos("[a-zA-Z0-9]{4,20}", $admin_usuario)) {
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "Su USUARIO no coincide con el formato solicitado",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        }
+
+        # Verificando integridad de los datos #
+        if ($this->verificarDatos("[a-zA-Z0-9$@.-]{7,100}", $admin_clave)) {
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "Su CONTRASEÑA no coincide con el formato solicitado",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        }
+
+        
+        # Verificando administrador #
+        $check_admin = $this->ejecutarConsulta("SELECT * FROM usuario WHERE usuario_id='$admin_usuario' AND usuario_id='".$_SESSION['id']."'");
+
+        if($$check_admin->rowCount() == 1){
+            $$check_admin = $$check_admin->fetch();
+
+            if($check_admin['usuario_usuario']!=$admin_usuario || !password_verify($admin_clave, $check_admin['usuario_clave'])){
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Ocurrió un error inesperado",
+                    "texto" => "USUARIO o CLAVE de ADMINISTRADOR incorrectos",
+                    "icono" => "error"
+                ];
+                return json_encode($alerta);
+                exit();
+            }
+
+        } else {
+            $alerta = [
+                "tipo" => "simple",
+                "titulo" => "Ocurrió un error inesperado",
+                "texto" => "USUARIO o CLAVE de ADMINISTRADOR incorrectos",
+                "icono" => "error"
+            ];
+            return json_encode($alerta);
+            exit();
+        }
+
+        
+
+    }
 
 }
