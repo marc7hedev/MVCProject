@@ -49,8 +49,8 @@
 2. **Abrir en el navegador**:
    - Abre `http://localhost:8000` en tu navegador para ver la aplicación en funcionamiento.
    - Inicia sesión con las siguientes credenciales:
-   -    admin
-   -    Marco@17
+       admin
+       Marco@17
 
 ## 📂 Estructura del Proyecto
 
