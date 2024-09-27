@@ -45,7 +45,7 @@
 			</form>
 			<?php }else{ ?>
 			<figure class="image mb-6">
-			  	<img class="is-rounded" src="<?php echo APP_URL; ?>app/views/fotos/default.png">
+                <img class="is-rounded" src="<?php echo APP_URL; ?>app/views/fotos/default.png">
 			</figure>
 			<?php }?>
 		</div>
@@ -60,7 +60,8 @@
 				<label>Foto o imagen del usuario</label><br>
 
 				<div class="file has-name is-boxed is-justify-content-center mb-6">
-				  	<label class="file-label">
+
+                    <label class="file-label">
 						<input class="file-input" type="file" name="usuario_foto" accept=".jpg, .png, .jpeg" >
 						<span class="file-cta">
 							<span class="file-label">
@@ -76,6 +77,8 @@
 			</form>
 		</div>
 	</div>
+
+
 	<?php
 		}else{
 			include "./app/views/inc/error_alert.php";
