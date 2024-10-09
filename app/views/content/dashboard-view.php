@@ -5,7 +5,7 @@
             <?php
                 if(is_file("./app/views/fotos/".$_SESSION['foto'])){
                     echo '
-                        <img class="is-rounded" src="'.APP_URL.'app/views/fotos/'.$_SESSION['foto'].'.png">
+                        <img class="is-rounded" src="'.APP_URL.'app/views/fotos/'.$_SESSION['foto'].'">
                     ';
                 }else{
                     echo '
