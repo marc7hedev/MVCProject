@@ -9,9 +9,14 @@
 
         $insBuscador = new searchController();
 
-        
+        if($_POST['modulo_buscador'] == "buscar"){
+            echo $insBuscador->iniciarBuscadorControlador();
+        }
 
-        
+        if($_POST['modulo_buscador'] == "eliminar"){
+            echo $insBuscador->eliminarBuscadorControlador();
+        }
+
 
     } else {
         session_destroy();
